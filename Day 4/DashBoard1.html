@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Personal Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #8699b5;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #cf9b22;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 22px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #ddd;
+      padding: 10px;
+    }
+    nav button {
+      margin: 0 5px;
+      padding: 10px 15px;
+      border: none;
+      background: #2d87f0;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    nav button:hover {
+      background: #1c63b8;
+    }
+    section {
+      display: none;
+      padding: 20px;
+    }
+    section.active {
+      display: block;
+    }
+    .box {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+      max-width: 500px;
+      margin: auto;
+    }
+    input, select, button {
+      margin: 5px 0;
+      padding: 8px;
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .result {
+      margin-top: 10px;
+      padding: 10px;
+      background: #f0f0f0;
+      border-radius: 5px;
+      min-height: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<header>🎓 Student Personal Dashboard</header>
+
+<nav>
+  <button onclick="showTab('profile')">Profile</button>
+  <button onclick="showTab('age')">Age Checker</button>
+  <button onclick="showTab('greeting')">Greeting</button>
+  <button onclick="showTab('calculator')">Calculator</button>
+  <button onclick="showTab('quotes')">Quotes</button>
+</nav>
+
+<!-- Profile Section -->
+<section id="profile" class="active">
+  <div class="box">
+    <h2>Enter Your Profile</h2>
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="number" id="birthYear" placeholder="Enter Birth Year">
+    <input type="text" id="city" placeholder="Enter City">
+    <button onclick="saveProfile()">Save Profile</button>
+    <div class="result" id="profileResult"></div>
+  </div>
+</section>
+
+<!-- Age Checker -->
+<section id="age">
+  <div class="box">
+    <h2>Check Your Age</h2>
+    <button onclick="checkAge()">Check Age</button>
+    <div class="result" id="ageResult"></div>
+  </div>
+</section>
+
+<!-- Greeting -->
+<section id="greeting">
+  <div class="box">
+    <h2>Personalized Greeting</h2>
+    <button onclick="showGreeting()">Show Greeting</button>
+    <div class="result" id="greetResult"></div>
+  </div>
+</section>
+
+<!-- Calculator -->
+<section id="calculator">
+  <div class="box">
+    <h2>Simple Calculator</h2>
+    <input type="number" id="num1" placeholder="Enter first number">
+    <input type="number" id="num2" placeholder="Enter second number">
+    <select id="operation">
+      <option value="add">Add</option>
+      <option value="sub">Subtract</option>
+      <option value="mul">Multiply</option>
+      <option value="div">Divide</option>
+    </select>
+    <button onclick="calculate()">Calculate</button>
+    <div class="result" id="calcResult"></div>
+  </div>
+</section>
+
+<!-- Quotes -->
+<section id="quotes">
+  <div class="box">
+    <h2>Motivational Quote</h2>
+    <button onclick="showQuote()">Show Quote</button>
+    <div class="result" id="quoteResult"></div>
+  </div>
+</section>
+
+<script>
+  let student = {};
+
+  // Switch tabs
+  function showTab(tabId) {
+    document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+    document.getElementById(tabId).classList.add("active");
+  }
+
+  // Save Profile
+  function saveProfile() {
+    try {
+      let name = document.getElementById("name").value.trim();
+      let birthYear = document.getElementById("birthYear").value.trim();
+      let city = document.getElementById("city").value.trim();
+
+      if (!name || !birthYear || !city) {
+        throw "All fields are required!";
+      }
+
+      if (isNaN(birthYear) || birthYear < 1900 || birthYear > new Date().getFullYear()) {
+        throw "Enter a valid birth year!";
+      }
+
+      student = { name, birthYear: Number(birthYear), city };
+
+      document.getElementById("profileResult").innerText =
+        "Profile Saved:\n" + JSON.stringify(student, null, 2);
+    } catch (err) {
+      document.getElementById("profileResult").innerText = "Error: " + err;
+    }
+  }
+
+  // Age Checker
+  function checkAge() {
+    try {
+      if (!student.birthYear) throw "Please save your profile first!";
+      let currentYear = new Date().getFullYear();
+      let age = currentYear - student.birthYear;
+      let eligible = age >= 18 ? "✅ You are eligible (18+)" : "❌ Not eligible (below 18)";
+      document.getElementById("ageResult").innerText =
+        `Age: ${age}\n${eligible}`;
+    } catch (err) {
+      document.getElementById("ageResult").innerText = "Error: " + err;
+    }
+  }
+
+  // Greeting
+  function showGreeting() {
+    try {
+      if (!student.name) throw "Please save your profile first!";
+      let hour = new Date().getHours();
+      let greet;
+      if (hour < 12) greet = "Good Morning";
+      else if (hour < 18) greet = "Good Afternoon";
+      else greet = "Good Evening";
+      document.getElementById("greetResult").innerText =
+        `${greet}, ${student.name} from ${student.city}!`;
+    } catch (err) {
+      document.getElementById("greetResult").innerText = "Error: " + err;
+    }
+  }
+
+  // Calculator
+  function calculate() {
+    try {
+      let num1 = parseFloat(document.getElementById("num1").value);
+      let num2 = parseFloat(document.getElementById("num2").value);
+      let operation = document.getElementById("operation").value;
+
+      if (isNaN(num1) || isNaN(num2)) throw "Please enter valid numbers!";
+      let result;
+      switch (operation) {
+        case "add": result = num1 + num2; break;
+        case "sub": result = num1 - num2; break;
+        case "mul": result = num1 * num2; break;
+        case "div": 
+          if (num2 === 0) throw "Cannot divide by zero!";
+          result = num1 / num2; 
+          break;
+      }
+      document.getElementById("calcResult").innerText = `Result: ${result}`;
+    } catch (err) {
+      document.getElementById("calcResult").innerText = "Error: " + err;
+    }
+  }
+
+  // Quotes
+  function showQuote() {
+    let quotes = [
+      "Success is the sum of small efforts repeated day in and day out.",
+      "Don’t stop when you’re tired. Stop when you’re done.",
+      "Push yourself, because no one else is going to do it for you.",
+      "Your limitation—it’s only your imagination.",
+      "Dream it. Wish it. Do it."
+    ];
+    let random = Math.floor(Math.random() * quotes.length);
+    document.getElementById("quoteResult").innerText = quotes[random];
+  }
+</script>
+
+</body>
+</html>
