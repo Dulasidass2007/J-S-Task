@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Virtual Event Registration & Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      padding: 20px;
+      color: #333;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    input, button, select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #3498db;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    .hidden {
+      display: none;
+    }
+    .result {
+      background: #ecf0f1;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    pre {
+      background: #222;
+      color: #0f0;
+      padding: 10px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Virtual Event Registration</h2>
+  <div id="registrationSection">
+    <label>Name:</label>
+    <input type="text" id="name" placeholder="Enter your name">
+    <label>Email:</label>
+    <input type="email" id="email" placeholder="Enter your email">
+    <label>Age:</label>
+    <input type="number" id="age" placeholder="Enter your age">
+    <button onclick="registerUser()">Register</button>
+    <p id="errorMsg" class="error"></p>
+  </div>
+
+  <div id="quizSection" class="hidden">
+    <h2>Mini Quiz</h2>
+    <form id="quizForm">
+      <div id="questions"></div>
+      <button type="button" onclick="submitQuiz()">Submit Answers</button>
+    </form>
+  </div>
+
+  <div id="resultSection" class="hidden">
+    <h2>Result Summary</h2>
+    <div class="result">
+      <p id="summary"></p>
+      <h3>Stored JSON Data:</h3>
+      <pre id="jsonOutput"></pre>
+    </div>
+  </div>
+</div>
+
+<script>
+  let userData = {};
+  let quizData = [
+    {
+      q: "Which language runs in the browser?",
+      options: ["Python", "C", "JavaScript", "Java"],
+      answer: "JavaScript"
+    },
+    {
+      q: "What is 5 + 3?",
+      options: ["5", "8", "10", "15"],
+      answer: "8"
+    },
+    {
+      q: "Which HTML tag is used for a heading?",
+      options: ["<head>", "<h1>", "<p>", "<title>"],
+      answer: "<h1>"
+    },
+    {
+      q: "Which symbol is used for comments in JS?",
+      options: ["//", "/* */", "#", "<!-- -->"],
+      answer: "//"
+    }
+  ];
+
+  function registerUser() {
+    try {
+      let name = document.getElementById("name").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let age = parseInt(document.getElementById("age").value);
+
+      if (!name || !email || isNaN(age)) {
+        throw "All fields are required!";
+      }
+      if (age < 12) {
+        throw "Age must be 12 or above to participate!";
+      }
+
+      userData = { name, email, age };
+      document.getElementById("registrationSection").classList.add("hidden");
+      document.getElementById("quizSection").classList.remove("hidden");
+
+      loadQuiz();
+    } catch (err) {
+      document.getElementById("errorMsg").innerText = err;
+    }
+  }
+
+  function loadQuiz() {
+    let questionsDiv = document.getElementById("questions");
+    questionsDiv.innerHTML = "";
+
+    // Pick 3 random questions
+    let selected = quizData.sort(() => 0.5 - Math.random()).slice(0, 3);
+
+    selected.forEach((item, index) => {
+      let qDiv = document.createElement("div");
+      qDiv.innerHTML = `<p><b>Q${index+1}. ${item.q}</b></p>`;
+      item.options.forEach(opt => {
+        qDiv.innerHTML += `
+          <label>
+            <input type="radio" name="q${index}" value="${opt}"> ${opt}
+          </label><br>
+        `;
+      });
+      questionsDiv.appendChild(qDiv);
+    });
+
+    userData.selectedQuestions = selected;
+  }
+
+  function submitQuiz() {
+    let form = document.getElementById("quizForm");
+    let selected = userData.selectedQuestions;
+    let score = 0;
+
+    selected.forEach((item, index) => {
+      let ans = form[`q${index}`].value;
+      if (ans === item.answer) {
+        score += 1;
+      }
+    });
+
+    // Promise to simulate server delay
+    let promise = new Promise((resolve) => {
+      document.getElementById("quizSection").innerHTML = "<p><b>Calculating result...</b></p>";
+      setTimeout(() => resolve(score), 2000 + Math.random()*1000);
+    });
+
+    promise.then(score => {
+      let percentage = (score / 3) * 100;
+      let grade = "";
+      if (percentage >= 90) grade = "A";
+      else if (percentage >= 75) grade = "B";
+      else if (percentage >= 50) grade = "C";
+      else grade = "D";
+
+      let timestamp = new Date().toLocaleString();
+
+      let resultObj = {
+        ...userData,
+        score,
+        percentage,
+        grade,
+        timestamp
+      };
+
+      document.getElementById("resultSection").classList.remove("hidden");
+      document.getElementById("summary").innerText = 
+        `Hello ${userData.name},\nScore: ${score}/3\nPercentage: ${percentage.toFixed(2)}%\nGrade: ${grade}\nTime: ${timestamp}`;
+
+      document.getElementById("jsonOutput").innerText = JSON.stringify(resultObj, null, 2);
+    });
+  }
+  
+</script>
+
+</body>
+</html>
