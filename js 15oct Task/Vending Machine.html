@@ -1,0 +1,208 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    *{
+        overflow-x: hidden;
+    }
+    .container{
+         border: none;
+    display: flex;
+    text-align: center;
+    
+    justify-content: center;
+    gap: 80px;
+    padding: 30px;
+    margin: 30px;
+    
+    }
+    .items{
+         height: 400px;
+    width: 350px;
+    background-color: rgb(245, 222, 195);
+    border-radius: 20px;
+    margin-top: 50px;
+    
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    transition: 0.5s;
+    }
+    .items:hover{
+        width: 370px;
+        height: 420px;
+        box-shadow: -30px 30px 20px rgba(0,0,0,0.3);
+    }
+    .top{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .snackimg{
+        height: 200px;
+    width: auto;
+    border-radius: 20px;
+    background-color: blue;
+    background-size: cover;
+    }
+    input{
+        border-radius: 20px;
+        width: 80px;
+        height: 30px;
+    }
+    button{
+        border-radius: 20px;
+        margin-top: 20px;
+        height: 30px;
+    }
+    .billdiv{
+        height: auto;
+        width: 100%;
+        background-color: bisque;
+        border-radius: 20px;
+    }
+
+</style></head>
+
+<body>
+    <div class="top"><center><h1>Vending Machine</h1></center>🛒</div>
+    <hr>
+    <div class="container">
+        <div class="items"><div class="snackimg" style="background-image: url(360_F_383553406_GhfyYwt5gJfNgH0hOx4FierUQJ3lKwER.jpg);background-size: cover;"></div>
+        <h1>KitKat</h1>No of stocks:<p id="stocks" style="display: inline;">15</p><br>Rs.<h4 style="display: inline;">20</h4>
+        <br><input type="number" id="noofitems"><button onclick="orderplace(this)">Add</button></div>
+        <div class="items"><div class="snackimg" style="background-image: url(Nestle_Munch_-_Crunchiest_Ever_20.1_g_Pouch.jpg);background-size: cover;"></div>
+        <h1>Munch</h1>No of stocks:<p id="stocks" style="display: inline;">15</p><br>Rs.<h4 style="display: inline;">20</h4><br>
+        <input type="number" id="noofitems"><button onclick="orderplace(this)">Add</button></div>
+        <div class="items"><div class="snackimg" style="background-image: url(61VK7wFSYML._UF1000\,1000_QL80_.jpg);background-size: cover;"></div>
+        <h1>Oreo</h1>No of stocks:<p id="stocks" style="display: inline;">15</p><br>Rs.<h4 style="display: inline;">20</h4><br>
+        <input type="number"><button onclick="orderplace(this)">Add</button></div>
+        
+    </div>
+    <div class="container">
+        <div class="items"><div class="snackimg" style="background-image: url(1621870105.jpg);background-size: cover;"></div>
+        <h1>Perk</h1>No of stocks:<p id="stocks" style="display: inline;">25</p><br>Rs.<h4 style="display: inline;">5</h4>
+        <br><input type="number" id="noofitems"><button onclick="orderplace(this)">Add</button></div>
+        <div class="items"><div class="snackimg" style="background-image: url(618fySthK8L.jpg);background-size: cover;"></div>
+        <h1>5Star</h1>No of stocks:<p id="stocks" style="display: inline;">15</p><br>Rs.<h4 style="display: inline;">5</h4><br>
+        <input type="number" id="noofitems"><button onclick="orderplace(this)">Add</button></div>
+        <div class="items"><div class="snackimg" style="background-image: url(istockphoto-469741712-612x612.jpg);background-size: cover;"></div>
+        <h1>Diary Milk</h1>No of stocks:<p id="stocks" style="display: inline;">15</p><br>Rs.<h4 style="display: inline;">20</h4><br>
+        <input type="number"><button onclick="orderplace(this)">Add</button></div>
+        
+    </div>
+   
+ <center><div class="billdiv">
+<h1>Order Details</h1>
+<li id="tasklist" style="list-style-type: none;"></li>
+<p id="totalnoitems"> Total No of items: </p>
+
+<h2 id="Tamount">Total Amount:</h2>
+Enter code for 10% discount:
+<input type="number" id="passint" placeholder="Enter Coopencode">
+<button onclick="generatebill()">Apply</button>
+<h2 id="newtotal">Total Amount:</h3>
+    <button onclick="Gpay()">Gpay</button>
+    <button onclick="PhonePay()">PhonePay</button>
+    <button onclick="Cash()">Cash</button>
+</div>
+ </center>
+    <script>
+     
+        let noofitems;
+    let totalitems = 0;
+    let nameofitem;
+    let Amount=0;
+    let totalamount = 0;
+function orderplace(button){
+    const parentDiv = button.parentElement;
+    Amount = Number(parentDiv.querySelector("h4").innerText)
+    nameofitem = parentDiv.querySelector("h1").textContent;
+  noofitems = Number(parentDiv.querySelector("input").value);
+ let stocks = parentDiv.querySelector("p").textContent;
+ let num = Number(stocks);
+if (noofitems<=num && noofitems>0) {
+    let placeorder = confirm("are you want to add this items to cart")
+    if (placeorder){
+        let newii = (num-noofitems);
+        let str = String(newii);
+       parentDiv.querySelector("p").innerHTML= str;
+       parentDiv.querySelector("input").value=" ";
+
+        bill(Amount);
+    }
+}
+else if(noofitems>num){
+    alert("Sorry! Only" + stocks+" items left,No of items excess than stock:"+(noofitems-num));
+
+}
+else{
+    alert("invalid")
+}
+
+}
+function bill(){
+     totalitems += noofitems;
+     
+     
+    //  alert(totalitems);
+     document.getElementById("totalnoitems").innerText = 'No of items:'+totalitems ;
+    let li = document.createElement("li");
+    li.textContent = nameofitem+'x'+noofitems;
+    document.getElementById("tasklist").appendChild(li);
+    totalamount += (noofitems*Amount);
+    
+    document.getElementById("Tamount").innerText = 'Total Amount:'+totalamount;
+}
+function generatebill(){
+    
+    console.log(totalamount);
+    
+    let passint = document.getElementById("passint").value;
+    
+    if(passint == "1234"){
+        let newtotal = (totalamount/100*90);
+        document.getElementById("newtotal").innerText = 'Total Amount:'+newtotal;
+        document.getElementById("passint").value=" ";
+    }
+    else{
+        alert("invalid code");
+    }
+}
+function Gpay(){
+    var pin = prompt("Enter Your PIN:");
+    if (pin == "1234") {
+          document.getElementById("tasklist").innerHTML=" ";
+          document.getElementById("totalnoitems").innerHTML="Total No of items:";
+          document.getElementById("Tamount").innerHTML="Total Amount";
+          document.getElementById("newtotal").innerHTML="Total Amount";
+          alert("AmountRecived");
+}
+else{
+    alert("invaid pin ,Please try again");
+}
+}
+function PhonePay(){
+    var pin = prompt("Enter Your PIN:");
+    if (pin == "1234") {
+          document.getElementById("tasklist").innerHTML=" ";
+          document.getElementById("totalnoitems").innerHTML="Total No of items:";
+          document.getElementById("Tamount").innerHTML="Total Amount";
+          document.getElementById("newtotal").innerHTML="Total Amount";
+          alert("AmountRecived");
+}
+else{
+    alert("invaid pin ,Please try again");
+}
+}
+function Cash(){
+    document.getElementById("tasklist").innerHTML=" ";
+          document.getElementById("totalnoitems").innerHTML="Total No of items:";
+          document.getElementById("Tamount").innerHTML="Total Amount";
+          document.getElementById("newtotal").innerHTML="Total Amount";
+    alert("cash recived successfuly")
+   totalitems = 0;
+}
+    </script>
+</body></html>

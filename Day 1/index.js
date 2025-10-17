@@ -1,17 +1,39 @@
-let num = "90";
-let a = Number(num);
-switch(true)
+/*var a = 80 ;
+
+if ( a>=90 && a<=100)
 {
-    case a>=90 && a<=100:
-        console.log("Grade A");
-        break;
-    case a>=75 && a<=89:
-        console.log("Grade B");
-        break;
-    case a>=50 && a<=74:
-        console.log("Grade C");
-        break;
-    default:
-        console.log("Fail");
-}
-console.log(num)
+  
+        console.log("Grade A")}
+        
+   if (a>=75 && a<=89)
+    {
+        console.log("Grade B")}
+        
+  if (a>=50 && a<=74)
+  {
+        console.log("Grade C")}
+        if (a<50){
+            console.log("fail")
+        } */
+       
+        var num= "80" ;
+        var a = Number(num)
+
+if ( a>=90 && a<=100)
+{
+  
+        console.log("Grade A")}
+        
+   if (a>=75 && a<=89)
+    {
+        console.log("Grade B")}
+        
+  if (a>=50 && a<=74)
+  {
+        console.log("Grade C")}
+        if (a<50){
+            console.log("fail")
+        }
+       
+    
+       

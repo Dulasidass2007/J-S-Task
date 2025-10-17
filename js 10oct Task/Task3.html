@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let tm = 0;
+        for(i=0;i<5;i++){
+            a =Number(prompt("enteryour mark"+[i]))
+            tm = tm+ a
+        }
+        if ((tm/5)>=90){
+            alert("totalmark="+tm+"\naverage="+(tm/5)+"\ngradeA")}
+        
+          else if ((tm/5)>=75){
+            alert("totalmark="+tm+"\naverage="+(tm/5)+"\ngradeB")
+            
+
+        }  else if ((tm/5)>=50){
+            alert("totalmark="+tm+"\naverage="+(tm/5)+"\ngradeC")
+        }  else if ((tm/5)<50){
+            alert("totalmark="+tm+"\naverage="+(tm/5)+"\nFail")
+        }
+    </script>
+</body>
+</html>

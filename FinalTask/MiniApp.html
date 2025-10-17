@@ -1,213 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Virtual Event Registration & Quiz</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Quiz App</title>
   <style>
+    :root {
+      --primary-color: #191970;
+      /* Midnight Blue */
+      --secondary-color: #ffffff;
+      /* White */
+      --accent-color: #e0f0ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f9;
-      padding: 20px;
-      color: #333;
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    h2 {
-      color: #2c3e50;
+
+    header {
+      background-color: var(--primary-color);
+      color: var(--secondary-color);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+
+    header h1 {
+      font-size: 1.5rem;
     }
-    input, button, select {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      background: #3498db;
-      color: white;
-      cursor: pointer;
+
+    .register-btn {
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+      border: 2px solid var(--secondary-color);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
       font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
-    button:hover {
-      background: #2980b9;
+
+    .register-btn:hover {
+      background-color: var(--accent-color);
+      color: var(--primary-color);
     }
-    .hidden {
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .quiz-container {
+      background-color: var(--accent-color);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+
+    .quiz-container h2 {
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    .quiz-container p {
+      color: #333;
+      font-size: 1rem;
+    }
+
+    #register {
       display: none;
     }
-    .result {
-      background: #ecf0f1;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 20px;
+
+    input {
+      width: 200px;
+      height: 30px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      padding: 3px;
     }
-    pre {
-      background: #222;
-      color: #0f0;
-      padding: 10px;
-      border-radius: 6px;
-      overflow-x: auto;
+
+    table {
+      margin: 0 auto;
     }
-    .error {
-      color: red;
-      font-weight: bold;
+
+
+    #html {
+      display: none;
+    }
+
+
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .register-btn {
+        margin-top: 0.5rem;
+      }
+    }
+
+    #q1section {
+      text-align: left;
+    }
+
+    #q2section {
+      display: none;
+      text-align: left;
+    }
+
+    #q3section {
+      display: none;
+      text-align: left;
+
+    }
+
+    #submit {
+      display: none;
+    }
+
+    #restartbutton {
+    display: none;
+      position: relative;
+      top:30px;
+    }
+
+    #json {
+      display: none;
     }
   </style>
 </head>
+
 <body>
 
-<div class="container">
-  <h2>Virtual Event Registration</h2>
-  <div id="registrationSection">
-    <label>Name:</label>
-    <input type="text" id="name" placeholder="Enter your name">
-    <label>Email:</label>
-    <input type="email" id="email" placeholder="Enter your email">
-    <label>Age:</label>
-    <input type="number" id="age" placeholder="Enter your age">
-    <button onclick="registerUser()">Register</button>
-    <p id="errorMsg" class="error"></p>
-  </div>
+  <!-- Header with title and register button -->
+  <header>
+    <h1>Quiz App</h1>
+    <button class="register-btn" onclick="showRegisterForm()">Create Profile</button>
+  </header>
 
-  <div id="quizSection" class="hidden">
-    <h2>Mini Quiz</h2>
-    <form id="quizForm">
-      <div id="questions"></div>
-      <button type="button" onclick="submitQuiz()">Submit Answers</button>
-    </form>
-  </div>
+  <!-- Main content area -->
+  <main>
+    <!-- Registeration form -->
+    <div class="quiz-container" id="register">
+      <table>
+        <tr>
+          <td>Name :</td>
+          <td><input type="text" placeholder="Enter your full name" id="name"></td>
+        </tr>
+        <tr>
+          <td>Age :</td>
+          <td><input type="number" placeholder="Enter your age" id="age"></td>
+        </tr>
+        <tr>
+          <td>Email :</td>
+          <td><input type="email" placeholder="Enter your email address" id="email"></td>
+        </tr>
 
-  <div id="resultSection" class="hidden">
-    <h2>Result Summary</h2>
-    <div class="result">
-      <p id="summary"></p>
-      <h3>Stored JSON Data:</h3>
-      <pre id="jsonOutput"></pre>
+        <tr>
+          <td colspan="2"><button class="register-btn" onclick="saveprofile()">Save Profile</button></td>
+        </tr>
+      </table>
+      <div id="formresult" style="color: red;"></div>
     </div>
-  </div>
-</div>
 
-<script>
-  let userData = {};
-  let quizData = [
-    {
-      q: "Which language runs in the browser?",
-      options: ["Python", "C", "JavaScript", "Java"],
-      answer: "JavaScript"
-    },
-    {
-      q: "What is 5 + 3?",
-      options: ["5", "8", "10", "15"],
-      answer: "8"
-    },
-    {
-      q: "Which HTML tag is used for a heading?",
-      options: ["<head>", "<h1>", "<p>", "<title>"],
-      answer: "<h1>"
-    },
-    {
-      q: "Which symbol is used for comments in JS?",
-      options: ["//", "/* */", "#", "<!-- -->"],
-      answer: "//"
+    <!-- Welcome screen -->
+    <div class="quiz-container" id="welcome">
+      <h2>Welcome to the Quiz!</h2>
+      <p>Click Start to begin testing your knowledge.</p>
+      <br />
+      <button class="register-btn" onclick="startquiz()">Start Quiz</button>
+      <div id="result1" style="color: red;"></div>
+    </div>
+
+    <!-- Question screen -->
+    <div class="quiz-container" id="html">
+      <section id="q1section">
+        <h2 id="htmlq1">HTML</h2>
+        <p id="htmloption"></p>
+        <input type='text' id='answer1' placeholder='Enter your answer (1-4)'>
+        <button class="register-btn" onclick="next()">Next</button>
+        <div class="questionresult"></div>
+      </section>
+
+      <section id="q2section">
+        <h2 id="htmlq2"></h2>
+        <p id="q2option"></p>
+        <input type='text' id='answer2' placeholder='Enter your answer (1-4)>'>
+        <button class="register-btn" onclick="next1()">Next</button>
+      </section>
+
+      <section id="q3section">
+        <h2 id="htmlq3"></h2>
+        <p id="q3option"></p>
+        <input type='text' id='answer3' placeholder='Enter your answer (1-4)'>
+        <button class="register-btn" onclick="submit()">Submit</button>
+
+      </section>
+
+      <section id="submit">
+        <h2 id="result"></h2>
+        <h2 id="percentage"></h2>
+        <h2 id="grade"></h2>
+      </section>
+
+
+      <!-- restart button  -->
+      <button onclick=restart() class="register-btn" id="restartbutton">Restart Quiz</button>
+
+      <!-- JSON Container  -->
+      <div id="json">
+        <button onclick="json()" class="register-btn">View Profile (JSON)</button>
+        <div id="jsonresult" style="color: red;"></div>
+      </div>
+    </div>
+  </main>
+
+
+
+
+
+
+  <script>
+
+
+    let logger = { name: "", age: "", mail: "",score :"" };
+    let registerDiv = document.getElementById("register");
+    let welcomeDiv = document.getElementById("welcome");
+
+
+
+    // Register form 
+    function showRegisterForm() {
+      let registerDiv = document.getElementById("register");
+      let welcomeDiv = document.getElementById("welcome");
+      registerDiv.style.display = "block";
+      welcomeDiv.style.display = "none";
+      document.getElementById("html").style.display = "none";
+
+
+
     }
-  ];
 
-  function registerUser() {
-    try {
-      let name = document.getElementById("name").value.trim();
-      let email = document.getElementById("email").value.trim();
-      let age = parseInt(document.getElementById("age").value);
 
-      if (!name || !email || isNaN(age)) {
-        throw "All fields are required!";
-      }
-      if (age < 12) {
-        throw "Age must be 12 or above to participate!";
-      }
-
-      userData = { name, email, age };
-      document.getElementById("registrationSection").classList.add("hidden");
-      document.getElementById("quizSection").classList.remove("hidden");
-
-      loadQuiz();
-    } catch (err) {
-      document.getElementById("errorMsg").innerText = err;
-    }
-  }
-
-  function loadQuiz() {
-    let questionsDiv = document.getElementById("questions");
-    questionsDiv.innerHTML = "";
-
-    // Pick 3 random questions
-    let selected = quizData.sort(() => 0.5 - Math.random()).slice(0, 3);
-
-    selected.forEach((item, index) => {
-      let qDiv = document.createElement("div");
-      qDiv.innerHTML = `<p><b>Q${index+1}. ${item.q}</b></p>`;
-      item.options.forEach(opt => {
-        qDiv.innerHTML += `
-          <label>
-            <input type="radio" name="q${index}" value="${opt}"> ${opt}
-          </label><br>
-        `;
-      });
-      questionsDiv.appendChild(qDiv);
-    });
-
-    userData.selectedQuestions = selected;
-  }
-
-  function submitQuiz() {
-    let form = document.getElementById("quizForm");
-    let selected = userData.selectedQuestions;
-    let score = 0;
-
-    selected.forEach((item, index) => {
-      let ans = form[`q${index}`].value;
-      if (ans === item.answer) {
-        score += 1;
-      }
-    });
-
-    // Promise to simulate server delay
-    let promise = new Promise((resolve) => {
-      document.getElementById("quizSection").innerHTML = "<p><b>Calculating result...</b></p>";
-      setTimeout(() => resolve(score), 2000 + Math.random()*1000);
-    });
-
-    promise.then(score => {
-      let percentage = (score / 3) * 100;
-      let grade = "";
-      if (percentage >= 90) grade = "A";
-      else if (percentage >= 75) grade = "B";
-      else if (percentage >= 50) grade = "C";
-      else grade = "D";
-
-      let timestamp = new Date().toLocaleString();
-
-      let resultObj = {
-        ...userData,
-        score,
-        percentage,
-        grade,
-        timestamp
-      };
-
-      document.getElementById("resultSection").classList.remove("hidden");
-      document.getElementById("summary").innerText = 
-        `Hello ${userData.name},\nScore: ${score}/3\nPercentage: ${percentage.toFixed(2)}%\nGrade: ${grade}\nTime: ${timestamp}`;
-
-      document.getElementById("jsonOutput").innerText = JSON.stringify(resultObj, null, 2);
-    });
-  }
+    // Profile section 
+    
   
-</script>
+    function saveprofile() {
 
+      try {
+        document.getElementById("html").style.display = "none";
+
+        let name = document.getElementById("name").value;
+        let age = document.getElementById("age").value;
+        let mail = document.getElementById("email").value;
+
+        if (!name || !age || !mail) throw "Please fill out all the fields!";
+        
+
+        logger.name = name;
+        logger.age = age;
+        logger.mail = mail;
+        if (logger.age < 12) {
+          document.getElementById("formresult").innerText = "You are Below 12! Please try again!";
+        }
+        else {
+          document.getElementById("formresult").innerText = "Profile Saved!";
+          setTimeout(() => {
+            registerDiv.style.display = "none";
+            welcomeDiv.style.display = "block";
+          }, 1000);
+        }
+      
+
+      }
+      catch (err) {
+        document.getElementById("result").innerText = err;
+      }
+      
+    }
+  
+  
+
+    // Start section 
+    function startquiz() {
+
+      try {
+        if (!logger.name) throw "Please complete your profile before starting the quiz.";
+        document.getElementById("result1").innerText = "Loading Quiz...";
+
+
+        setTimeout(() => {
+          console.log(logger.option)
+
+          document.getElementById("html").style.display = "block";
+          welcomeDiv.style.display = "none";
+        }, 2000);
+
+
+
+      }
+      catch (err) {
+        document.getElementById("result1").innerText = err;
+      }
+
+    }
+
+
+    // html questions
+
+
+
+    document.getElementById("htmlq1").innerText = "What does HTML stand for?";
+    document.getElementById("htmloption").innerHTML = "1.Hyperlinks and Text Markup Language<br>2.Home Tool Markup Language<br>3.Hyper Text Markup Language<br>4.Hyper Tool Multi Language<br>"; //here i finished i have to create a division inside html division and change it for each question ok good morning!;
+
+    function next() {
+      document.getElementById("q1section").style.display = "none";
+      document.getElementById("q2section").style.display = "block";
+      document.getElementById("htmlq2").innerText = "Which HTML tag is used to display a picture on a webpage?";
+      document.getElementById("q2option").innerHTML = "1.picture<br>2.img<br>3.image<br>4.photo"; //here i finished i have to create a division inside html division and change it for each question ok good morning!;
+
+    }
+
+    function next1() {
+      document.getElementById("q1section").style.display = "none";
+      document.getElementById("q2section").style.display = "none";
+      document.getElementById("q3section").style.display = "block";
+
+      document.getElementById("htmlq3").innerText = "Which tag is used to create a hyperlink in HTML?";
+      document.getElementById("q3option").innerHTML = "1.a<br>2.link<br>3.href<br>4.hyper link"; //here i finished i have to create a division inside html division and change it for each question ok good morning!;
+
+    }
+
+
+
+    function submit() {
+      let count = 0;
+      let score = 0;
+      let ans1 = document.getElementById("answer1").value;
+
+
+
+      document.getElementById("submit").style.display = "block";
+      document.getElementById("q3section").style.display = "none";
+
+      if (ans1 == "3" || ans1 == "Hyper Text Markup Language") {
+        score += 1;
+        count += 1;
+
+      }
+      let ans2 = document.getElementById("answer2").value;
+
+      if (ans2 == "2" || ans2 == "img") {
+        score += 1;
+        count += 1;
+      }
+
+      let ans3 = document.getElementById("answer3").value;
+
+      if (ans3 == "1" || ans3 == "a") {
+        score += 1;
+        count += 1;
+      }
+      logger.score = score;
+
+
+      // Submit section 
+
+      document.getElementById("submit").innerText = "Calculating result.."
+      const now = new Date();
+      const hour = now.getHours();
+      const min = now.getMinutes();
+
+      setTimeout(() => {
+        document.getElementById("submit").innerText = "Your Score :" + score;
+        document.getElementById("submit").innerHTML += "<br>";
+        document.getElementById("submit").innerText += "Questions Answered :" + count;
+        document.getElementById("submit").innerHTML += "<br>";
+        document.getElementById("submit").innerText += "Your Percentage :" + Math.floor((score / 3) * 100) + "%";
+        document.getElementById("submit").innerHTML += "<br>";
+        document.getElementById("submit").innerText += "Time : " + hour + ":" + min;
+        document.getElementById("restartbutton").style.display = "block";
+        document.getElementById("restartbutton").style.marginLeft = "0px";
+        document.getElementById("json").style.display = "block";
+      }, 2000);
+    }
+
+    // Restart section 
+
+    function restart() {
+      location.reload()
+    }
+
+    // JSON section 
+    function json() {
+      let json = JSON.stringify(logger);
+      document.getElementById("jsonresult").innerText = json;
+
+    }
+
+  </script>
 </body>
+
 </html>

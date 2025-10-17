@@ -1,0 +1,140 @@
+  /* .bgvid{
+        
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+
+}   */
+*{
+       overflow-x: hidden;
+       overflow-y: hidden;
+} 
+#go{
+    
+    margin-top: 300px;
+    font-size: 30px;
+    color: rgb(187, 32, 32);
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    z-index: 1;
+    position: relative;
+}
+.btn{
+         font-size: 40px;
+         height: fit-content;
+         width: fit-content;
+         background: transparent;
+         border-radius: 10px;
+         border-width: 1px;
+         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+         font-weight: bold;
+         
+}
+#section2{
+    display: none;
+    /* background-image: url(paper-autumn-leaves-arrangement-orange-background-with-copy-space.jpg);
+    background-size: cover; */
+    background-color: #ffb253;
+    padding-left: 30px;
+    margin: -7px;
+   /* height: 1000px;
+   width: 100%; */
+}
+img{
+  width: 80px;
+}
+.btnnav{
+  float: right;
+  
+  margin: 10px 30px;
+  margin-top: 25px;
+  border: none;
+  background-color: #ffb253;
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 50px;
+  color: white;
+  
+  
+}
+#section3{
+  display: none;
+  background-image: url(paper-autumn-leaves-arrangement-orange-background-with-copy-space.jpg);
+  height: 800px;
+  background-size: cover;
+  margin: -7px;
+}
+#section4{
+  display: none;
+ height: 400px;
+ width: 500px;
+ background-color: transparent;
+    box-shadow: -20px 20px 20px rgba(0,0,0,0.5);
+ float: right;
+ margin-top: 75px;
+ margin-right: 150px;
+ text-align: center;
+ padding-top: 100px;
+ padding-left: 20px;
+ color: white;
+ font-weight: bold;
+ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ border-radius: 20px;
+  backdrop-filter: saturate(180%) blur(5px);
+}
+#section5{
+  display: none;
+   height: 400px;
+ width: 500px;
+ background-color: transparent;
+    box-shadow: -20px 20px 20px rgba(0,0,0,0.5);
+ float: right;
+ margin-top: 75px;
+ margin-right: 250px;
+ text-align: center;
+ padding-top: 20px;
+ padding-left: 20px;
+ color: white;
+ font-weight: bold;
+ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ border-radius: 20px;
+  backdrop-filter: saturate(180%) blur(5px);
+
+}
+#taskinut{
+  width: 450px;
+  height: 35px;
+  border-radius: 20px;
+  border: none;
+}
+.addinut{
+  height: 40px;
+  border-radius: 100px;
+  width: 30px;
+  border: none;
+  font-size: 25px;
+  font-weight: bold;
+  color: rgb(139, 145, 143);
+  margin-left: 5px;
+  
+}
+#section6{
+          display: none;
+   height: 400px;
+ width: 500px;
+ background-color: transparent;
+    box-shadow: -20px 20px 20px rgba(0,0,0,0.5);
+ float: right;
+ margin-top: 75px;
+ margin-right: 250px;
+ text-align: center;
+ padding-top: 20px;
+ padding-left: 20px;
+ color: white;
+ font-weight: bold;
+ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ border-radius: 20px;
+  backdrop-filter: saturate(180%) blur(5px);
+
+}

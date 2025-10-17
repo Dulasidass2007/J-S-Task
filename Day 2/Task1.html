@@ -6,30 +6,30 @@
     <title>Document</title>
     <script>
         
-check();
-function check()
+f()
 
-{
+function f(){
+
     Name =prompt("Your name");
 age = prompt("Your age");
 if(age>=18)
 {
-    alert("Hello "+Name+", You are eligible to vote.");
+    confirm("Hello "+Name+", You are eligible to vote.");
 }
 else{
-    alert("Sorry "+Name+",  You are not eligible to vote.");
+    confrim("Sorry "+Name+",  You are not eligible to vote.");
 }
-call()
+l()
 }
 
-function call()
+function l()
 {
-if(confirm("Do you want to check again?"))
+if(confrim("Do you want to check again?"))
 {
-    check();
+    f();
 }
 else{
-    alert("Good Bye!");
+    confirm("Good Bye!");
 }
 }
     </script>

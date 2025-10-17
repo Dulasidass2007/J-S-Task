@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let billamount=prompt("Enter your bill amount");
+        // billamount=Number(billamount);
+        // alert(billamount)
+        // if(billamount>500){
+        //     alert("originalbill="+billamount+"\ndiscountamount="+billamount*0.2+"amount payable="+billamount-(billamount*0.2))
+        // }
+        // else {
+        //     alert("originalbill="+billamount+"\ndiscountamount="+billamount*0.1+"amount payable="+billamount-(billamount*0.1))
+        //  }
+        let bill = prompt("enter the bill amount", '0');
+bill = Number(bill);
+let v, s, b;
+if (bill > 500) {
+    v = "20%"
+    s = bill * 0.2;
+    b = bill - s;
+    alert(`The total is ${bill}\n The discount is ${v}\nThe bill amount is ${b}`);
+}
+else {
+    v = "10%";
+    s = bill * 0.1;
+    b = bill - s;
+    alert(`The total is ${bill}\n The discount is ${v}\nThe bill amount is ${b}`);
+}
+    </script>
+</body>
+
+
+
+
+</html>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz App</title>
     <script>
-    let entry =  confirm("                                Welcome to the Quiz App!\n Test your knowledge with multiple-choice questions. Choose the correct answer, track your score, and challenge yourself to improve.\n\n\nClick Ok to Start the Quiz");
+    let entry =  confirm("Welcome to the Quiz App!\n Test your knowledge with multiple-choice questions. Choose the correct answer, track your score, and challenge yourself to improve.\n\n\nClick Ok to Start the Quiz");
     if(entry == "1")
     {
         let score = 0;
@@ -14,7 +14,7 @@
     {
         score+=1;
     }
-        let q2 = prompt("b.What will typeof null return in JavaScript?\n\n\n1.null\n2.object\n3.undefined\n4.boolean");
+        let q2 = prompt("b.What will type of null return in JavaScript?\n\n\n1.null\n2.object\n3.undefined\n4.boolean");
         if(q2 == "2")
     {
         score+=1;
@@ -25,7 +25,7 @@
         score+=1;
     }
         alert("Your Score: " +score+"/3");
-        location.reload();
+        
     }
     
     </script>

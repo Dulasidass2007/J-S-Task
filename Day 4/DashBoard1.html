@@ -1,239 +1,349 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Student Personal Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #8699b5;
-      margin: 0;
-      padding: 0;
+      margin: 20px;
+      background-color: black;
+      color: rgb(241, 30, 40);
     }
-    header {
-      background: #cf9b22;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      font-size: 22px;
+
+    button {
+      border-radius: 20px;
+      background-color: rgb(241, 30, 40);
+      color: black;
+      width: 100px;
+      height: 50px;
     }
-    nav {
-      display: flex;
-      justify-content: center;
-      background: #ddd;
-      padding: 10px;
-    }
-    nav button {
-      margin: 0 5px;
-      padding: 10px 15px;
-      border: none;
-      background: #2d87f0;
-      color: white;
-      border-radius: 5px;
+
+    button:hover {
       cursor: pointer;
     }
-    nav button:hover {
-      background: #1c63b8;
-    }
-    section {
-      display: none;
-      padding: 20px;
-    }
-    section.active {
-      display: block;
-    }
-    .box {
+
+    #section1 {
       background: white;
-      padding: 20px;
+      padding: 15px;
       border-radius: 8px;
-      box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
-      max-width: 500px;
-      margin: auto;
+      margin-top: 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+      width: 400px;
+      position: relative;
+      left: 400px;
+      text-align: center;
     }
-    input, select, button {
+
+    #section2 {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+     margin-top: 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      display: none;
+      width: 400px;
+      position: relative;
+      left: 400px;
+      text-align: center;
+    }
+
+    #section3 {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+     margin-top: 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      display: none;
+      width: 400px;
+      position: relative;
+      left: 400px;
+      text-align: center;
+    }
+
+    #section4 {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+     margin-top: 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      display: none;
+      width: 400px;
+      position: relative;
+      left: 400px;
+      text-align: center;
+    }
+
+    #section4 button {
+      width: 80px;
+    }
+
+    #section5 {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+     margin-top: 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      display: none;
+      width: 400px;
+      position: relative;
+      left: 400px;
+      text-align: center;
+    }
+
+
+
+    h1 {
+      margin-top: 50px;
+      color: white;
+    }
+
+    #section6 {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      display: none;
+      width: 400px;
+      position: relative;
+      left: 400px;
+      text-align: center;
+    }
+
+    input,
+    button {
       margin: 5px 0;
       padding: 8px;
-      width: 100%;
-      border-radius: 5px;
-      border: 1px solid #ccc;
     }
-    .result {
+
+    .output {
       margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    #jsonOutput {
+      background: #eee;
       padding: 10px;
-      background: #f0f0f0;
       border-radius: 5px;
-      min-height: 30px;
+      overflow-wrap: break-word;
+      color: black;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-around;
     }
   </style>
 </head>
+
 <body>
-
-<header>🎓 Student Personal Dashboard</header>
-
-<nav>
-  <button onclick="showTab('profile')">Profile</button>
-  <button onclick="showTab('age')">Age Checker</button>
-  <button onclick="showTab('greeting')">Greeting</button>
-  <button onclick="showTab('calculator')">Calculator</button>
-  <button onclick="showTab('quotes')">Quotes</button>
-</nav>
-
-<!-- Profile Section -->
-<section id="profile" class="active">
-  <div class="box">
-    <h2>Enter Your Profile</h2>
-    <input type="text" id="name" placeholder="Enter Name">
-    <input type="number" id="birthYear" placeholder="Enter Birth Year">
-    <input type="text" id="city" placeholder="Enter City">
+  <h1>Student Personal Dashboard</h1>
+  <nav>
+    <h3><button onclick="visible1()">Profile</button></h3>
+    <h3><button onclick="visible2()">Age Calculator</button></h3>
+    <h3><button onclick="visible3()">Greeting</button></h3>
+    <h3><button onclick="visible4()">Calculator</button></h3>
+    <h3><button onclick="visible5()">Motivational Quote</button></h3>
+    <h3><button onclick="visible6()">Student Info (JSON)</button></h3>
+  </nav>
+  <div id="section1">
+    <h2>Profile</h2>
+    <input type="text" id="name" placeholder="Enter your name"><br>
+    <input type="number" id="birthYear" placeholder="Enter birth year"><br>
+    <input type="text" id="city" placeholder="Enter your city"><br>
     <button onclick="saveProfile()">Save Profile</button>
-    <div class="result" id="profileResult"></div>
+    <div class="output" id="profileOutput"></div>
   </div>
-</section>
 
-<!-- Age Checker -->
-<section id="age">
-  <div class="box">
-    <h2>Check Your Age</h2>
-    <button onclick="checkAge()">Check Age</button>
-    <div class="result" id="ageResult"></div>
+
+  <!-- Age Checker -->
+  <div id="section2">
+    <h2>Age Checker</h2>
+    <button onclick="checkAge()">Check Age & Eligibility</button>
+    <div class="output" id="ageOutput"></div>
   </div>
-</section>
 
-<!-- Greeting -->
-<section id="greeting">
-  <div class="box">
-    <h2>Personalized Greeting</h2>
+  <!-- Greeting -->
+  <div id="section3">
+    <h2>Greeting</h2>
     <button onclick="showGreeting()">Show Greeting</button>
-    <div class="result" id="greetResult"></div>
+    <div class="output" id="greetingOutput"></div>
   </div>
-</section>
 
-<!-- Calculator -->
-<section id="calculator">
-  <div class="box">
-    <h2>Simple Calculator</h2>
-    <input type="number" id="num1" placeholder="Enter first number">
-    <input type="number" id="num2" placeholder="Enter second number">
-    <select id="operation">
-      <option value="add">Add</option>
-      <option value="sub">Subtract</option>
-      <option value="mul">Multiply</option>
-      <option value="div">Divide</option>
-    </select>
-    <button onclick="calculate()">Calculate</button>
-    <div class="result" id="calcResult"></div>
+  <!-- Calculator -->
+  <div id="section4">
+    <h2>Calculator</h2>
+    <input type="number" id="num1" placeholder="First number">
+    <input type="number" id="num2" placeholder="Second number"><br>
+    <button onclick="calculate('add')">Add</button>
+    <button onclick="calculate('sub')">Subtract</button>
+    <button onclick="calculate('mul')">Multiply</button>
+    <button onclick="calculate('div')">Divide</button>
+    <div class="output" id="calcOutput"></div>
   </div>
-</section>
 
-<!-- Quotes -->
-<section id="quotes">
-  <div class="box">
+  <!-- Quotes -->
+  <div id="section5">
     <h2>Motivational Quote</h2>
-    <button onclick="showQuote()">Show Quote</button>
-    <div class="result" id="quoteResult"></div>
+    <button onclick="showQuote()">Get Quote</button>
+    <div class="output" id="quoteOutput"></div>
   </div>
-</section>
 
-<script>
-  let student = {};
+  <!-- JSON Info -->
+  <div id="section6">
+    <h2>Student Info (JSON)</h2>
+    <button onclick="showJSON()">View JSON</button>
+    <div id="jsonOutput"></div>
+  </div>
 
-  // Switch tabs
-  function showTab(tabId) {
-    document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
-    document.getElementById(tabId).classList.add("active");
-  }
 
-  // Save Profile
-  function saveProfile() {
-    try {
-      let name = document.getElementById("name").value.trim();
-      let birthYear = document.getElementById("birthYear").value.trim();
-      let city = document.getElementById("city").value.trim();
-
-      if (!name || !birthYear || !city) {
-        throw "All fields are required!";
-      }
-
-      if (isNaN(birthYear) || birthYear < 1900 || birthYear > new Date().getFullYear()) {
-        throw "Enter a valid birth year!";
-      }
-
-      student = { name, birthYear: Number(birthYear), city };
-
-      document.getElementById("profileResult").innerText =
-        "Profile Saved:\n" + JSON.stringify(student, null, 2);
-    } catch (err) {
-      document.getElementById("profileResult").innerText = "Error: " + err;
+  <script>
+    function visible1() {
+      document.getElementById("section1").style.display = "block";
+      document.getElementById("section2").style.display = "none";
+      document.getElementById("section3").style.display = "none";
+      document.getElementById("section4").style.display = "none";
+      document.getElementById("section5").style.display = "none";
+      document.getElementById("section6").style.display = "none";
     }
-  }
 
-  // Age Checker
-  function checkAge() {
-    try {
-      if (!student.birthYear) throw "Please save your profile first!";
-      let currentYear = new Date().getFullYear();
-      let age = currentYear - student.birthYear;
-      let eligible = age >= 18 ? "✅ You are eligible (18+)" : "❌ Not eligible (below 18)";
-      document.getElementById("ageResult").innerText =
-        `Age: ${age}\n${eligible}`;
-    } catch (err) {
-      document.getElementById("ageResult").innerText = "Error: " + err;
+    function visible2() {
+      document.getElementById("section1").style.display = "none";
+      document.getElementById("section2").style.display = "block";
+      document.getElementById("section3").style.display = "none";
+      document.getElementById("section4").style.display = "none";
+      document.getElementById("section5").style.display = "none";
+      document.getElementById("section6").style.display = "none";
     }
-  }
 
-  // Greeting
-  function showGreeting() {
-    try {
-      if (!student.name) throw "Please save your profile first!";
-      let hour = new Date().getHours();
-      let greet;
-      if (hour < 12) greet = "Good Morning";
-      else if (hour < 18) greet = "Good Afternoon";
-      else greet = "Good Evening";
-      document.getElementById("greetResult").innerText =
-        `${greet}, ${student.name} from ${student.city}!`;
-    } catch (err) {
-      document.getElementById("greetResult").innerText = "Error: " + err;
+    function visible3() {
+      document.getElementById("section1").style.display = "none";
+      document.getElementById("section2").style.display = "none";
+      document.getElementById("section3").style.display = "block";
+      document.getElementById("section4").style.display = "none";
+      document.getElementById("section5").style.display = "none";
+      document.getElementById("section6").style.display = "none";
     }
-  }
 
-  // Calculator
-  function calculate() {
-    try {
-      let num1 = parseFloat(document.getElementById("num1").value);
-      let num2 = parseFloat(document.getElementById("num2").value);
-      let operation = document.getElementById("operation").value;
-
-      if (isNaN(num1) || isNaN(num2)) throw "Please enter valid numbers!";
-      let result;
-      switch (operation) {
-        case "add": result = num1 + num2; break;
-        case "sub": result = num1 - num2; break;
-        case "mul": result = num1 * num2; break;
-        case "div": 
-          if (num2 === 0) throw "Cannot divide by zero!";
-          result = num1 / num2; 
-          break;
-      }
-      document.getElementById("calcResult").innerText = `Result: ${result}`;
-    } catch (err) {
-      document.getElementById("calcResult").innerText = "Error: " + err;
+    function visible4() {
+      document.getElementById("section1").style.display = "none";
+      document.getElementById("section2").style.display = "none";
+      document.getElementById("section3").style.display = "none";
+      document.getElementById("section4").style.display = "block";
+      document.getElementById("section5").style.display = "none";
+      document.getElementById("section6").style.display = "none";
     }
-  }
 
-  // Quotes
-  function showQuote() {
-    let quotes = [
-      "Success is the sum of small efforts repeated day in and day out.",
-      "Don’t stop when you’re tired. Stop when you’re done.",
-      "Push yourself, because no one else is going to do it for you.",
-      "Your limitation—it’s only your imagination.",
-      "Dream it. Wish it. Do it."
-    ];
-    let random = Math.floor(Math.random() * quotes.length);
-    document.getElementById("quoteResult").innerText = quotes[random];
-  }
-</script>
+    function visible5() {
+      document.getElementById("section1").style.display = "none";
+      document.getElementById("section2").style.display = "none";
+      document.getElementById("section3").style.display = "none";
+      document.getElementById("section4").style.display = "none";
+      document.getElementById("section5").style.display = "block";
+      document.getElementById("section6").style.display = "none";
+    }
 
-</body>
+    function visible6() {
+      document.getElementById("section1").style.display = "none";
+      document.getElementById("section2").style.display = "none";
+      document.getElementById("section3").style.display = "none";
+      document.getElementById("section4").style.display = "none";
+      document.getElementById("section5").style.display = "none";
+      document.getElementById("section6").style.display = "block";
+    }
+
+
+    // let student = { name: "", birthYear: null, city: "" };
+    function saveProfile() {
+      // try {
+        var name = document.getElementById("name")
+        var birthYear = document.getElementById("birthYear")
+        let  c  = document.getElementById("city")
+
+        
+    //     if (!name || isNaN(birthYear) || !city) throw "All fields are required.";
+
+        
+    //     document.getElementById("profileOutput").innerText =
+    //       "Profile saved " + name;
+    //   } catch (err) {
+    //     document.getElementById("profileOutput").innerText = "Error: " + err;
+    //   }
+    // }
+
+//     function checkAge() {
+//       try {
+//         let eligible;
+//         let currentYear = new Date().getFullYear();
+//         let age = currentYear - birthYear.value;
+//         if (!birthYear.value) { throw "Please fill out your Profile."; }
+//         age >= 18 ? eligible = "You are Eligible" : eligible = "You are not Eligible";
+//         document.getElementById("ageOutput").innerText = "Age :" + age + "  " + eligible;
+//       } catch (err) {
+//         document.getElementById("ageOutput").innerText = document.getElementById("ageOutput").innerText = "Error :" + err;
+//       }
+//     }
+
+
+//     function showGreeting() {
+
+//       let hour = new Date().getHours();
+//       let greeting = hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
+//       student.name ? document.getElementById("greetingOutput").innerText = greeting + " " + student.name : document.getElementById("greetingOutput").innerText = greeting;
+
+//     }
+
+//     function calculate(action) {
+//       let num1 = Number(document.getElementById("num1").value);
+//       let num2 = Number(document.getElementById("num2").value);
+
+//       if (action == "add") {
+//         let result = num1 + num2;
+//         console.log(result)
+//         document.getElementById("calcOutput").innerText = "Addition Result : " + result;
+//       }
+
+//       if (action == "sub") {
+//         let result = num1 - num2;
+//         console.log(result)
+//         document.getElementById("calcOutput").innerText = "Subtraction Result :" + result;
+//       }
+
+//       if (action == "mul") {
+//         let result = num1 * num2;
+//         console.log(result)
+//         document.getElementById("calcOutput").innerText = "Multiplication Result :" + result;
+//       }
+
+//       if (action == "div") {
+//         let result = num1 / num2;
+//         console.log(result)
+//         document.getElementById("calcOutput").innerText = "Division Result :" + result;
+//       }
+//     }
+
+
+//     let quotes = ["Success is not final, failure is not fatal: It is the courage to continue that counts.",
+//       "The future belongs to those who believe in the beauty of their dreams.",
+//       "Don’t let yesterday take up too much of today.",
+//       "Hard work beats talent when talent doesn’t work hard.",
+//       "Believe you can and you're halfway there."];
+
+//     function showQuote() {
+//       let n = Math.floor(Math.random() * quotes.length);
+//       document.getElementById("quoteOutput").innerText = quotes[n];
+//     }
+
+//     function showJSON() {
+//       let jason = JSON.stringify(student);
+//       student.name ? document.getElementById("jsonOutput").innerText = jason : document.getElementById("jsonOutput").innerText = "Please fill out your Profile!"
+
+//     }
+//   </script>
+ </body>
 </html>

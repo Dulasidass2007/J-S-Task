@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="cal.css">
+</head>
+<body>
+    <center><div class="it1"><div>
+        <div class="cal">calculator</div><br>
+        <input  id="inputbox" readonly>
+    </div>
+    <div>
+        <button onclick="cleardisplay('')">AC</button>
+        <button onclick="input('(')">(</button>
+        <button onclick="input(')')">)</button>
+        <button onclick="input('+')">+</button>
+    </div>
+     <div>
+        <button onclick="input('7')">7</button>
+        <button onclick="input('8')">8</button>
+        <button onclick="input('9')">9</button>
+        <button onclick="input('/')">/</button>
+    </div>
+     <div>
+        <button onclick="input('4')">4</button>
+        <button onclick="input('5')">5</button>
+        <button onclick="input('6')">6</button>
+        <button onclick="input('*')">*</button>
+    </div>
+     <div>
+        <button onclick="input('1')">1</button>
+        <button onclick="input('2')">2</button>
+        <button onclick="input('3')">3</button>
+        <button onclick="input('-')">-</button>
+    </div>
+    <div>
+        <button onclick="input('.')">.</button>
+        <button onclick="input('0')">0</button>
+        <button onclick="calculate('')">=</button>
+        <button onclick="dbtn('')"><</button>
+    </div></div></center>
+    <script src="cal.js"></script>
+</body>
+</html>
